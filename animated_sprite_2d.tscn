@@ -171,4 +171,4 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_pmyd3")
-animation = &"idle"
+animation = &"Firing Bullet"

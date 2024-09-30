@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://miuaksoaavad"]
+
+[ext_resource type="Texture2D" uid="uid://b4ud7t1qkqh1m" path="res://Spaceship.png" id="1_8lbwd"]
+[ext_resource type="Script" path="res://laser.gd" id="1_o2ng0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsytw"]
+size = Vector2(16, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ay1e"]
+atlas = ExtResource("1_8lbwd")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d5abb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ay1e")
+}],
+"loop": true,
+"name": &"laser_shoot",
+"speed": 5.0
+}]
+
+[node name="Laser" type="CharacterBody2D"]
+script = ExtResource("1_o2ng0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_bsytw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2.625, 2.625)
+sprite_frames = SubResource("SpriteFrames_d5abb")
+animation = &"laser_shoot"
