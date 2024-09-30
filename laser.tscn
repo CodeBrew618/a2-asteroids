@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://laser.gd" id="1_o2ng0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsytw"]
-size = Vector2(16, 37)
+size = Vector2(26, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ay1e"]
 atlas = ExtResource("1_8lbwd")
@@ -25,11 +25,11 @@ animations = [{
 script = ExtResource("1_o2ng0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8.5)
+position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_bsytw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(2.625, 2.625)
+scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_d5abb")
 animation = &"laser_shoot"

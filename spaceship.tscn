@@ -12,7 +12,7 @@ script = ExtResource("1_1avrx")
 
 [node name="AnimatedSprite2D" parent="." instance=ExtResource("2_nvla4")]
 scale = Vector2(6.4375, 6.4375)
-animation = &"Rotate left"
+animation = &"Warping"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)

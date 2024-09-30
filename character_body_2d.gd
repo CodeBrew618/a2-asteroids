@@ -5,32 +5,29 @@ const SPEED = 300.0
 #const JUMP_VELOCITY = -400.0
 const laserPath = preload("res://laser.tscn")
 var move = 5.0
+const FIRE_FORCE = -200.0
+var shipVelocity = Vector2()
+var viewport_size = Vector2()
+var warping = false
+var warp_timer = Timer.new()
+
+
+
+func _ready() -> void:
+	viewport_size = get_viewport().size
+	add_child(warp_timer)
+	position = viewport_size/2
+
 
 func _physics_process(delta: float) -> void:
-	pass
-	# Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-
+	if not warping:
+		position += velocity*delta
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if warping:
+		return
+	
 	if Input.is_action_pressed("ui_right"):
 		self.rotation += delta*move
 		$AnimatedSprite2D.play("Rotate right")
@@ -48,15 +45,57 @@ func _process(delta: float) -> void:
 	else:
 		$AnimatedSprite2D.play("idle")
 		
-	
+	warp()
 		
 func shoot():
+	if warping:
+		return
 	var laser = laserPath.instantiate()
 	get_parent().add_child(laser)
 	laser.position = $Marker2D.global_position
 	laser.rotation = self.rotation
 	
-
+	#apple back force when shooting.
+	var force_direction = Vector2.UP.rotated(rotation)
+	velocity += force_direction *FIRE_FORCE
+	
+	
+func warp():
+	if warping:
+		return
+		
+	if position.x < 0:
+		warping = true
+		position.x = viewport_size.x
+		$AnimatedSprite2D.play("Warping")
+		warp_timer.start(0.5)
+		await warp_timer.timeout
+		
+	elif position.x > viewport_size.x:
+		warping = true
+		position.x = 0
+		$AnimatedSprite2D.play("Warping")
+		warp_timer.start(0.5)
+		await warp_timer.timeout
+		
+	if position.y < 0:
+		warping = true
+		position.y = viewport_size.y
+		$AnimatedSprite2D.play("Warping")
+		warp_timer.start(0.5)
+		await warp_timer.timeout
+	elif position.y > viewport_size.y:
+		warping = true
+		position.y = 0
+		$AnimatedSprite2D.play("Warping")
+		warp_timer.start(0.5)
+		await warp_timer.timeout
+		
+	warping = false
+		
+func on_asteroid_hit():
+	var backward_force = Vector2.DOWN.rotated(rotation) * FIRE_FORCE
+	velocity += backward_force
 	
 	
 	
