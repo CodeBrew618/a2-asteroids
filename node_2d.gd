@@ -1,18 +1,20 @@
-extends Area2D
+extends RigidBody2D
+
 
 
 var speed = Vector2()
 var rotational_speed = 0.0
 var center_position = Vector2()
 var asteroid_scale = Vector2()
-var minRotate= -20.0
-var maxRotate= 20.0
+var minRotate= -10.0
+var maxRotate= 10.0
 
 var life = 1
 
 
 
 func _ready() -> void:	
+	add_to_group("asteroid")
 	var viewport_size = get_viewport().get_visible_rect().size
 	
 	# Randomize the asteroid's position and scale
@@ -44,5 +46,9 @@ func _physics_process(delta: float) -> void:
 func damage(amount: int):
 	life -=amount
 	if life <= 0:
-		print("i died")
 		queue_free()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("collisionable"):
+		print("we are colliasioned")

@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx2achckhir3n"]
+
+[ext_resource type="Texture2D" uid="uid://cycn84e0qedsp" path="res://meteorBrown_big1.png" id="1_tgmje"]
+
+[sub_resource type="GDScript" id="GDScript_twkd5"]
+script/source = "extends CharacterBody2D
+
+var speed = Vector2()  # The velocity of the asteroid
+var rotational_speed = 0.0
+var center_position = Vector2()
+var asteroid_scale = Vector2()
+var minRotate = -10.0
+var maxRotate = 10.0
+var life = 1
+
+func _ready() -> void:
+	add_to_group(\"asteroid\")
+	var viewport_size = get_viewport().get_visible_rect().size
+	
+	# Randomize the asteroid's position and scale
+	position = Vector2(randf_range(0.0, viewport_size.x), randf_range(0.0, viewport_size.y))
+	scale = Vector2(randf_range(1.0, 2.0), randf_range(1.0, 2.0))
+	asteroid_scale = scale
+
+	rotational_speed = randf_range(minRotate, maxRotate)
+
+	center_position = viewport_size / 2
+	var direction_to_center = (center_position - position).normalized()
+	
+	# Set the speed based on the direction towards the center
+	var initial_speed = randf_range(100.0, 200.0)
+	speed = direction_to_center * initial_speed
+
+func _physics_process(delta: float) -> void:
+	scale = asteroid_scale
+	rotation += rotational_speed * delta
+
+	# Move the asteroid based on speed
+	velocity = speed
+	var collision = move_and_collide(velocity * delta)
+	
+	if collision and collision.get_collider().is_in_group(\"spaceship\"):
+		var spaceship = collision.get_collider()  # Get the spaceship node
+		
+		# Reflect the asteroid's velocity along the collision normal to simulate a bounce
+		var normal = collision.get_normal()
+		speed = speed.bounce(normal)  # Reflect the velocity
+		
+		# Apply the bounce to the spaceship as well
+		spaceship.apply_bounce(normal)
+
+func damage(amount: int):
+	life -= amount
+	if life <= 0:
+		queue_free()
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_45mtc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tgmje")
+}],
+"loop": true,
+"name": &"asteroid",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Asteroids" type="CharacterBody2D" groups=["Damageable", "asteroid", "collisionable"]]
+slide_on_ceiling = false
+script = SubResource("GDScript_twkd5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["collisionable"]]
+sprite_frames = SubResource("SpriteFrames_45mtc")
+animation = &"asteroid"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["collisionable"]]
+polygon = PackedVector2Array(-33, -38, 20, -40, 49, 0, 34, 34, 11, 29, -22, 43, -50, 10)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." groups=["Damageable", "collisionable"]]

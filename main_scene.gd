@@ -1,10 +1,10 @@
 extends Node2D
-const asteroid_scene = preload("res://asteroids.tscn")
+const asteroid_scene = preload("res://Asteroid/asteroids.tscn")
 var spawn_timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_timer.wait_time = 1.0
+	spawn_timer.wait_time = 5.0
 	spawn_timer.autostart = true
 	spawn_timer.one_shot = false
 	add_child(spawn_timer)

@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED = 300.0
 const laserPath = preload("res://Laser/lasers.tscn")
 var move = 5.0
@@ -13,6 +12,7 @@ var warp_timer = Timer.new()
 
 
 func _ready() -> void:
+	
 	viewport_size = get_viewport().size
 	add_child(warp_timer)
 	position = viewport_size/2
@@ -20,7 +20,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not warping:
-		position += velocity*delta
+		var collision_force = Vector2(100, 0)  # Example force, modify as needed
+		move_and_slide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -94,19 +95,7 @@ func warp():
 		
 	warping = false
 		
-func on_asteroid_hit():
-	var backward_force = Vector2.DOWN.rotated(rotation) * FIRE_FORCE
-	velocity += backward_force
+		
+func apply_collision_force(collision_force: Vector2) -> void:
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
+	velocity += collision_force

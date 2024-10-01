@@ -24,6 +24,8 @@ window/size/resizable=false
 [global_group]
 
 Damageable=""
+collisionable=""
+asteroid=""
 
 [rendering]
 

@@ -6,16 +6,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sk42s"]
 size = Vector2(209, 158)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["collisionable"]]
 motion_mode = 1
 script = ExtResource("1_1avrx")
 
-[node name="AnimatedSprite2D" parent="." instance=ExtResource("2_nvla4")]
+[node name="AnimatedSprite2D" parent="." groups=["collisionable"] instance=ExtResource("2_nvla4")]
 scale = Vector2(6.4375, 6.4375)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Damageable"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Damageable", "collisionable"]]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_sk42s")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -108)
+
+[connection signal="child_entered_tree" from="CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]

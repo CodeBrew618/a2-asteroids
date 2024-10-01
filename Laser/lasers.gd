@@ -21,6 +21,6 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		viewport.damage(1)
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(area: CharacterBody2D) -> void:
 	if area.is_in_group("Damageable"):
 		area.damage(1)

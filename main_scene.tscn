@@ -19,5 +19,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_rjqvb")]
+motion_mode = 0
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
