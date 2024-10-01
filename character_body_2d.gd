@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
 const laserPath = preload("res://laser.tscn")
 var move = 5.0
 const FIRE_FORCE = -200.0
@@ -39,6 +38,7 @@ func _process(delta: float) -> void:
 		#play("Rotate left")
 		
 	elif Input.is_action_just_pressed("ui_select"):
+		$AnimatedSprite2D.play("Firing Bullet")
 		shoot()
 		
 		
@@ -50,6 +50,7 @@ func _process(delta: float) -> void:
 func shoot():
 	if warping:
 		return
+	
 	var laser = laserPath.instantiate()
 	get_parent().add_child(laser)
 	laser.position = $Marker2D.global_position

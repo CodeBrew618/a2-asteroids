@@ -1,6 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://xlfblmgqcdy0"]
 
 [ext_resource type="Texture2D" uid="uid://b4ud7t1qkqh1m" path="res://Spaceship.png" id="1_qjwtd"]
+[ext_resource type="Texture2D" uid="uid://culbq83tyjnmw" path="res://Spaceship (1) with the fire animation.png" id="2_j3bve"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_534l5"]
 atlas = ExtResource("1_qjwtd")
@@ -22,13 +23,9 @@ region = Rect2(32, 64, 32, 32)
 atlas = ExtResource("1_qjwtd")
 region = Rect2(64, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d8u63"]
-atlas = ExtResource("1_qjwtd")
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvyhp"]
+atlas = ExtResource("2_j3bve")
 region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n1yrf"]
-atlas = ExtResource("1_qjwtd")
-region = Rect2(32, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkbv0"]
 atlas = ExtResource("1_qjwtd")
@@ -101,11 +98,8 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d8u63")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n1yrf")
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_wvyhp")
 }],
 "loop": true,
 "name": &"Firing Bullet",
