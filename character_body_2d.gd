@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const laserPath = preload("res://laser.tscn")
+const laserPath = preload("res://Laser/lasers.tscn")
 var move = 5.0
 const FIRE_FORCE = -200.0
 var shipVelocity = Vector2()

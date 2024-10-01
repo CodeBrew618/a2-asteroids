@@ -1,7 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://miuaksoaavad"]
+[gd_scene load_steps=6 format=3 uid="uid://dle7ixv37hlr0"]
 
 [ext_resource type="Texture2D" uid="uid://b4ud7t1qkqh1m" path="res://Spaceship.png" id="1_8lbwd"]
-[ext_resource type="Script" path="res://laser.gd" id="1_o2ng0"]
+
+[sub_resource type="GDScript" id="GDScript_2muhj"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 600.0
+#const JUMP_VELOCITY = -400.0
+
+
+
+func _physics_process(delta: float) -> void:
+
+	velocity = Vector2.UP.rotated(rotation)*SPEED
+		
+		
+	var collision_info = move_and_collide(velocity.normalized()*delta*SPEED)
+	if collision_info:
+		
+		queue_free()
+
+
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if viewport.is_in_group(\"Damageable\"):
+		viewport.damage(1)
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsytw"]
 size = Vector2(26, 64)
@@ -21,8 +45,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Laser" type="CharacterBody2D"]
-script = ExtResource("1_o2ng0")
+[node name="Laser" type="CharacterBody2D" groups=["Damageable"]]
+script = SubResource("GDScript_2muhj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
@@ -33,3 +57,8 @@ texture_filter = 1
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_d5abb")
 animation = &"laser_shoot"
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
