@@ -23,7 +23,6 @@ func _physics_process(delta: float) -> void:
 		var collision_force = Vector2(100, 0)  # Example force, modify as needed
 		move_and_slide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if warping:
 		return
@@ -57,7 +56,6 @@ func shoot():
 	laser.position = $Marker2D.global_position
 	laser.rotation = self.rotation
 	
-	#apple back force when shooting.
 	var force_direction = Vector2.UP.rotated(rotation)
 	velocity += force_direction *FIRE_FORCE
 	

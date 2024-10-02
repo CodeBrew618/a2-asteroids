@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b4ud7t1qkqh1m" path="res://Spaceship.png" id="1_iv5jr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46536"]
-size = Vector2(26, 64)
+size = Vector2(26, 70)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ay1e"]
 atlas = ExtResource("1_iv5jr")
@@ -21,14 +21,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Lasers" type="Area2D" groups=["Damageable", "asteroid", "collisionable"]]
+[node name="Lasers" type="Area2D" groups=["asteroid", "laser"]]
 script = ExtResource("1_1wfel")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -14)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["laser"]]
+position = Vector2(0, -17)
 shape = SubResource("RectangleShape2D_46536")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["laser"]]
 texture_filter = 1
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_yarbn")
