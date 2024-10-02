@@ -31,6 +31,7 @@ func _ready() -> void:
 	print("Signal connection successful: ", connected)
 	
 
+
 		
 
 func _process(delta: float) -> void:
@@ -43,5 +44,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("laser"):
+		
 		print("Laser hit the asteroid!")
+		$"asteroid-explode-sfx".play()
+		await $"asteroid-explode-sfx".finished
 		queue_free()
+			

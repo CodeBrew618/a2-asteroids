@@ -1,22 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://btm5utx6pf4xo"]
+[gd_scene load_steps=6 format=3 uid="uid://btm5utx6pf4xo"]
 
 [ext_resource type="Script" path="res://main_scene.gd" id="1_584lf"]
 [ext_resource type="PackedScene" uid="uid://b1laf6qnkg7mq" path="res://spaceship.tscn" id="1_rjqvb"]
+[ext_resource type="Texture2D" uid="uid://doqrep1bm81pn" path="res://space.jpg" id="3_cmw8h"]
+[ext_resource type="Shader" path="res://scroll.gdshader" id="3_lmslf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w42i8"]
+shader = ExtResource("3_lmslf")
 
 [node name="main scene" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_584lf")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_right = 0.968
+[node name="bg" type="TextureRect" parent="."]
+texture_filter = 5
+texture_repeat = 2
+material = SubResource("ShaderMaterial_w42i8")
+custom_minimum_size = Vector2(100, 0)
+anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 36.8639
-grow_horizontal = 2
+offset_right = 2573.0
+offset_bottom = 1454.0
 grow_vertical = 2
+texture = ExtResource("3_cmw8h")
+stretch_mode = 6
 
 [node name="CharacterBody2D" parent="." groups=["asteroid"] instance=ExtResource("1_rjqvb")]
 motion_mode = 0

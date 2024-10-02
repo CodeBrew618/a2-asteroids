@@ -1,6 +1,7 @@
 extends Node2D
 
 const asteroid_scene = preload("res://Asteroid/asteroids.tscn")
+const ship = preload("res://spaceship.tscn")
 var spawn_timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.

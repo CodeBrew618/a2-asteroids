@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1laf6qnkg7mq"]
+[gd_scene load_steps=6 format=3 uid="uid://b1laf6qnkg7mq"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_1avrx"]
 [ext_resource type="PackedScene" uid="uid://xlfblmgqcdy0" path="res://animated_sprite_2d.tscn" id="2_nvla4"]
+[ext_resource type="AudioStream" uid="uid://cbnljqbd7hoiu" path="res://SoundEffect/shoot.wav" id="3_2ikwr"]
+[ext_resource type="AudioStream" uid="uid://bsk7m0f5pvgy4" path="res://SoundEffect/crush.wav" id="4_s86ma"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sk42s"]
 size = Vector2(209, 158)
@@ -19,5 +21,12 @@ shape = SubResource("RectangleShape2D_sk42s")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -108)
+
+[node name="shoot-sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2ikwr")
+
+[node name="crush-sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_s86ma")
+volume_db = -3.23
 
 [connection signal="child_entered_tree" from="CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]

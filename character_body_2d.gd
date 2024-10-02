@@ -17,15 +17,23 @@ func _ready() -> void:
 	add_child(warp_timer)
 	position = viewport_size/2
 
+	connect("on_area_entered", Callable(self,"_on_area_entered"))
 
 func _physics_process(delta: float) -> void:
 	if not warping:
-		var collision_force = Vector2(100, 0)  # Example force, modify as needed
-		move_and_slide()
+		
+		
+		var collision_force = Vector2(200, 0) 
+	move_and_slide()
 
 func _process(delta: float) -> void:
 	if warping:
 		return
+	var collision = move_and_collide(Vector2())  
+	if collision and collision.get_collider().is_in_group("asteroid"): 
+			print("In Comming!!!!!")
+			$"crush-sfx".play()
+			await $"crush-sfx".finished
 	
 	if Input.is_action_pressed("ui_right"):
 		self.rotation += delta*move
@@ -50,7 +58,7 @@ func _process(delta: float) -> void:
 func shoot():
 	if warping:
 		return
-	
+	$"shoot-sfx".play()
 	var laser = laserPath.instantiate()
 	get_parent().add_child(laser)
 	laser.position = $Marker2D.global_position
@@ -97,3 +105,4 @@ func warp():
 func apply_collision_force(collision_force: Vector2) -> void:
 	
 	velocity += collision_force
+	
