@@ -9,6 +9,11 @@ var viewport_size = Vector2()
 var warping = false
 var warp_timer = Timer.new()
 
+var life = 1
+var health_bar: ProgressBar
+var is_dead = false
+
+var die_timer = Timer.new()
 
 
 func _ready() -> void:
@@ -18,11 +23,13 @@ func _ready() -> void:
 	position = viewport_size/2
 
 	connect("on_area_entered", Callable(self,"_on_area_entered"))
+	$AnimatedSprite2D.animation_finished.connect(Callable(self, "_on_animation_finished"))
+	$"../ProgressBar".value = 1
+	
+	
 
 func _physics_process(delta: float) -> void:
 	if not warping:
-		
-		
 		var collision_force = Vector2(200, 0) 
 		
 	move_and_slide()
@@ -32,7 +39,8 @@ func _process(delta: float) -> void:
 		return
 	var collision = move_and_collide(Vector2())  
 	if collision and collision.get_collider().is_in_group("asteroid"): 
-			print("In Comming!!!!!")
+		decrease_life(1)
+		if $"../ProgressBar".value != 0:
 			$CPUParticles2D.emitting = true
 			$"crush-sfx".play()
 			await $"crush-sfx".finished
@@ -105,6 +113,13 @@ func warp():
 		
 		
 func apply_collision_force(collision_force: Vector2) -> void:
-	
 	velocity += collision_force
 	
+func decrease_life(damage:int):
+	$"../ProgressBar".value -= 1
+	$AnimatedSprite2D.play("Die")
+	
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if $AnimatedSprite2D.animation == "Die":
+		get_tree().reload_current_scene()
