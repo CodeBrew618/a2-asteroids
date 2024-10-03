@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1laf6qnkg7mq"]
+[gd_scene load_steps=7 format=3 uid="uid://b1laf6qnkg7mq"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_1avrx"]
 [ext_resource type="PackedScene" uid="uid://xlfblmgqcdy0" path="res://animated_sprite_2d.tscn" id="2_nvla4"]
@@ -7,6 +7,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sk42s"]
 size = Vector2(209, 158)
+
+[sub_resource type="Curve" id="Curve_jgjig"]
+_data = [Vector2(0.649412, 0.832905), 0.0, 0.0, 0, 0]
+point_count = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["collisionable"]]
 motion_mode = 1
@@ -28,5 +32,23 @@ stream = ExtResource("3_2ikwr")
 [node name="crush-sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_s86ma")
 volume_db = -3.23
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-5, 0)
+emitting = false
+amount = 70
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.01
+explosiveness = 0.67
+randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 3.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_jgjig")
+color = Color(0.972915, 1.90598e-05, 0.657272, 1)
 
 [connection signal="child_entered_tree" from="CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]

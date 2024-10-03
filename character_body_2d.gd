@@ -24,6 +24,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 		var collision_force = Vector2(200, 0) 
+		
 	move_and_slide()
 
 func _process(delta: float) -> void:
@@ -32,6 +33,7 @@ func _process(delta: float) -> void:
 	var collision = move_and_collide(Vector2())  
 	if collision and collision.get_collider().is_in_group("asteroid"): 
 			print("In Comming!!!!!")
+			$CPUParticles2D.emitting = true
 			$"crush-sfx".play()
 			await $"crush-sfx".finished
 	
