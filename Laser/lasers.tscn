@@ -21,7 +21,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Lasers" type="Area2D" groups=["asteroid", "laser"]]
+[node name="Lasers" type="Area2D" groups=["laser"]]
 script = ExtResource("1_1wfel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["laser"]]

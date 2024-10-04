@@ -22,9 +22,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Asteroids" type="RigidBody2D" groups=["Damageable", "asteroid", "collisionable", "laser"]]
+[node name="Asteroids" type="RigidBody2D" groups=["asteroid"]]
 mass = 0.002
 physics_material_override = SubResource("PhysicsMaterial_58qlv")
+contact_monitor = true
+max_contacts_reported = 2
 script = ExtResource("1_115gm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["asteroid", "collisionable", "laser"]]
@@ -36,10 +38,11 @@ animation = &"asteroid"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-31, -39, 23, -39, 49, 0, 34, 32, 8, 29, -22, 41, -49, 11)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["asteroid"]]
 polygon = PackedVector2Array(-32, -39, 23, -39, 48, 0, 34, 31, 9, 28, -20, 41, -49, 10)
 
 [node name="asteroid-explode-sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_voiyn")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

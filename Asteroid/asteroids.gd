@@ -7,9 +7,11 @@ var asteroid_scale = Vector2()
 var minRotate = -10.0
 var maxRotate = 10.0
 var life = 1
+signal asteroid_destroyed
 
 
 func _ready() -> void:
+	
 	gravity_scale = 0
 	var viewport_size = get_viewport().get_visible_rect().size
 	
@@ -25,17 +27,14 @@ func _ready() -> void:
 	var initial_speed = randf_range(100.0, 200.0)
 	speed = direction_to_center * initial_speed
 
+	asteroid_destroyed.connect(Callable($Label,"_on_asteroid_destroyed"))
 	apply_central_impulse(speed)
 
-	var connected = connect("area_2d_area_entered", Callable(self, "_on_area_2d_area_entered"))
-	print("Signal connection successful: ", connected)
-	
-
-
-		
+	#connect("area_2d_area_entered", Callable(self, "_on_area_2d_area_entered"))
 
 func _process(delta: float) -> void:
 	pass
+	
 func _physics_process(delta: float) -> void:
 	scale = asteroid_scale
 	rotation += rotational_speed * delta
@@ -44,9 +43,15 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("laser"):
-		
-		print("Laser hit the asteroid!")
+		print("Triggered by area2D signal")
 		$"asteroid-explode-sfx".play()
+		
+		
+		asteroid_destroyed.emit()
 		await $"asteroid-explode-sfx".finished
 		queue_free()
-			
+
+#func _on_body_entered(body: Node) -> void:
+	#if body.is_in_group("laser"):
+		#print("Triggered by body enter signal")
+		

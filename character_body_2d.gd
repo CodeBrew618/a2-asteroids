@@ -23,7 +23,7 @@ func _ready() -> void:
 	position = viewport_size/2
 
 	connect("on_area_entered", Callable(self,"_on_area_entered"))
-	$"../ProgressBar".value = life
+	$"../gui/ProgressBar".value = life
 	$AnimatedSprite2D.animation_finished.connect(Callable(self, "_on_animation_finished"))
 	
 
@@ -45,6 +45,7 @@ func _process(delta: float) -> void:
 		await $"crush-sfx".finished
 	
 	if Input.is_action_pressed("ui_right"):
+		
 		self.rotation += delta*move
 		$AnimatedSprite2D.play("Rotate right")
 		#play("Rotate right")
@@ -119,7 +120,7 @@ func apply_collision_force(collision_force: Vector2) -> void:
 	
 func decrease_life(damage:int):
 	life -= damage
-	$"../ProgressBar".value = life
+	$"../gui/ProgressBar".value = life
 	if life == 0:
 		$AnimatedSprite2D.play("Die")
 		await $AnimatedSprite2D.animation_finished

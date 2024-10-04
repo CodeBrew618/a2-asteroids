@@ -15,7 +15,7 @@ func _ready() -> void:
 	timer.wait_time = 1.5 
 	timer.one_shot = true 
 	add_child(timer)
-	timer.connect("timeout", Callable(self, "_on_timeout"))  # Connect timeout to function
+	timer.connect("timeout", Callable(self, "_on_timeout"))  
 	timer.start()  
 	
 	
@@ -25,9 +25,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("asteroid"):
-		print("ohhaaaaaa!!!")
 		queue_free()
 		
 func _on_timeout() -> void:
-	
 	queue_free()
