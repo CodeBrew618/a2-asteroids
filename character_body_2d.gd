@@ -9,7 +9,7 @@ var viewport_size = Vector2()
 var warping = false
 var warp_timer = Timer.new()
 
-var life = 1
+var life = 10
 var health_bar: ProgressBar
 var is_dead = false
 
@@ -23,9 +23,8 @@ func _ready() -> void:
 	position = viewport_size/2
 
 	connect("on_area_entered", Callable(self,"_on_area_entered"))
+	$"../ProgressBar".value = life
 	$AnimatedSprite2D.animation_finished.connect(Callable(self, "_on_animation_finished"))
-	$"../ProgressBar".value = 1
-	
 	
 
 func _physics_process(delta: float) -> void:
@@ -38,12 +37,12 @@ func _process(delta: float) -> void:
 	if warping:
 		return
 	var collision = move_and_collide(Vector2())  
-	if collision and collision.get_collider().is_in_group("asteroid"): 
+	if collision and collision.get_collider().is_in_group("asteroid") and life > 0: 
 		decrease_life(1)
-		if $"../ProgressBar".value != 0:
-			$CPUParticles2D.emitting = true
-			$"crush-sfx".play()
-			await $"crush-sfx".finished
+		
+		$CPUParticles2D.emitting = true
+		$"crush-sfx".play()
+		await $"crush-sfx".finished
 	
 	if Input.is_action_pressed("ui_right"):
 		self.rotation += delta*move
@@ -59,7 +58,10 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.play("Firing Bullet")
 		shoot()
 		
-		
+	elif life <= 0:
+		$AnimatedSprite2D.play("Die")
+		get_tree().reload_current_scene()
+	
 	else:
 		$AnimatedSprite2D.play("idle")
 		
@@ -116,10 +118,12 @@ func apply_collision_force(collision_force: Vector2) -> void:
 	velocity += collision_force
 	
 func decrease_life(damage:int):
-	$"../ProgressBar".value -= 1
-	$AnimatedSprite2D.play("Die")
-	
+	life -= damage
+	$"../ProgressBar".value = life
+	if life == 0:
+		$AnimatedSprite2D.play("Die")
+		await $AnimatedSprite2D.animation_finished
 
-func _on_animated_sprite_2d_animation_finished() -> void:
+func _on_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "Die":
 		get_tree().reload_current_scene()
