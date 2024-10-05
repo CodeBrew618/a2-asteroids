@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://btm5utx6pf4xo"]
+[gd_scene load_steps=8 format=3 uid="uid://btm5utx6pf4xo"]
 
 [ext_resource type="Script" path="res://main_scene.gd" id="1_584lf"]
 [ext_resource type="PackedScene" uid="uid://b1laf6qnkg7mq" path="res://spaceship.tscn" id="1_rjqvb"]
@@ -8,6 +8,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w42i8"]
 shader = ExtResource("3_lmslf")
+
+[sub_resource type="Theme" id="Theme_7pqdy"]
 
 [node name="main scene" type="Node2D"]
 texture_filter = 1
@@ -27,9 +29,19 @@ texture = ExtResource("3_cmw8h")
 stretch_mode = 6
 
 [node name="CharacterBody2D" parent="." groups=["asteroid"] instance=ExtResource("1_rjqvb")]
-position = Vector2(898, 527)
+position = Vector2(1201, 1019)
 motion_mode = 0
 
 [node name="gui" parent="." instance=ExtResource("5_lljah")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 2231.0
+offset_top = 210.0
+offset_right = 2546.0
+offset_bottom = 384.0
+theme = SubResource("Theme_7pqdy")
+theme_override_font_sizes/font_size = 50
+text = "Charles Liu
+chl465 "
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

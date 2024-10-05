@@ -19,7 +19,7 @@ script = ExtResource("1_1avrx")
 [node name="AnimatedSprite2D" parent="." groups=["collisionable"] instance=ExtResource("2_nvla4")]
 scale = Vector2(6.4375, 6.4375)
 animation = &"Rotate left"
-frame_progress = 0.679575
+frame_progress = 0.871858
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Damageable", "collisionable"]]
 position = Vector2(0, -5)

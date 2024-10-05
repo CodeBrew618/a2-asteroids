@@ -8,7 +8,7 @@ var minRotate = -10.0
 var maxRotate = 10.0
 var life = 1
 signal asteroid_destroyed
-
+var _on_area_2d_area_entered_triggered :bool = false
 
 func _ready() -> void:
 	
@@ -43,6 +43,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("laser"):
+		_on_area_2d_area_entered_triggered = true
+		if _on_area_2d_area_entered_triggered:
+			print("flag is turn to true")
 		print("Triggered by area2D signal")
 		$"asteroid-explode-sfx".play()
 		
