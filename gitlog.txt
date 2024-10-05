@@ -1,0 +1,105 @@
+commit fc6a14bb92a9df13d93a61d83f3c2a5c8dd8995b
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Fri Oct 4 20:39:14 2024 -0600
+
+    add name on the main scene
+    
+    Finalizing the project folder
+
+commit c6d92b05ea1de276d3388c6c27e8d492b2265c76
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Fri Oct 4 19:34:03 2024 -0600
+
+    Make the rigidbody bouncy
+
+commit c3ec0d0150b987c47d07a2dbc96d5d9fd9ad8150
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Fri Oct 4 15:55:00 2024 -0600
+
+    Fix the score feature
+
+commit 5b356184c5a00c7f91e8ce68123bbdc5929901e0
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Thu Oct 3 20:26:41 2024 -0600
+
+    The game restart when the health bar is reach to 0.
+
+commit d0e8c1f227ede0d4531cae44c462ef16616a1e89
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Wed Oct 2 21:53:20 2024 -0600
+
+    Added Progress Bar indicate the health
+
+commit bed3661751f81ed5c3b0507f1f14e65ba87c98cd
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Wed Oct 2 19:36:48 2024 -0600
+
+    Add cup particles effect on ship
+
+commit a9353ecc4aa8f04807ca93b923ecd6d35f723c65
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Wed Oct 2 16:48:36 2024 -0600
+
+    Added background, sound effect
+
+commit fda489b72e995335c70899fd4c74ee449da454f0
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Wed Oct 2 14:28:57 2024 -0600
+
+    Implement laser can destroy if hit by a bullet
+
+commit 057c2dab45a060f879f4ea04dcf03a9b39bc4209
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Mon Sep 30 23:27:41 2024 -0600
+
+    add bounce from asteroid to spaceship
+
+commit 11013b479854699ebf65d060364c338a4a7e3465
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Mon Sep 30 22:05:50 2024 -0600
+
+    implemented asteroids
+    
+    add random sizes
+    add rotational speed
+    are destroyed by bullet
+
+commit a502b41b8d06b7a037cdd0da4c72d3ead1f46260
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Mon Sep 30 18:02:49 2024 -0600
+
+    add asteroid node,fix the movement issue
+
+commit f3818306c55032292352f8e90483b1adfd68690e
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Mon Sep 30 15:58:07 2024 -0600
+
+    added warping feature
+    
+    Add warping animations while beyond the screen.
+
+commit 74af3364e45765276c57764626c31de5c6c8402b
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Mon Sep 30 14:54:06 2024 -0600
+
+    Add movement,shoot actions.
+
+commit 794608ae40ef9ce4f8ffc4fe2753885d10bed296
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Sat Sep 28 20:23:43 2024 -0600
+
+    animated the player2D
+    
+    Created AnimatedSprite2D and implemented the script, left and right control with the correct animation.
+
+commit 9a5a06eaf91c10eee388ed17c6a99e5b71f7411d
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Fri Sep 27 13:59:49 2024 -0600
+
+    testing if the git set up correctly
+
+commit 0f21ab73d35b5d9f254e6d438622fb94ad15e233
+Author: Charles L <charlesliu618@gmail.com>
+Date:   Fri Sep 27 13:54:12 2024 -0600
+
+    initial the project folder
