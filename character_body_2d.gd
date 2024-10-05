@@ -48,6 +48,7 @@ func _process(delta: float) -> void:
 		
 		self.rotation += delta*move
 		$AnimatedSprite2D.play("Rotate right")
+
 		#play("Rotate right")
 		
 	elif Input.is_action_pressed("ui_left"):

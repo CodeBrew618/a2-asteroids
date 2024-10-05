@@ -9,8 +9,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	$".".text = str(score)
 	
-	
-	
 func _on_asteroid_destroyed() ->void:
 	score += 1
 	print($".".text)

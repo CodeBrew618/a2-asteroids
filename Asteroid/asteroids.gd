@@ -46,8 +46,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		print("Triggered by area2D signal")
 		$"asteroid-explode-sfx".play()
 		
-		
-		asteroid_destroyed.emit()
+		emit_signal("asteroid_destroyed")
 		await $"asteroid-explode-sfx".finished
 		queue_free()
 

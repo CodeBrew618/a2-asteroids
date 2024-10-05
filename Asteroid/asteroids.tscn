@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b8sgvaa1wxq4l" path="res://SoundEffect/explode.ogg" id="3_voiyn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_58qlv"]
+bounce = 1.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_45mtc"]
 animations = [{
@@ -23,8 +24,9 @@ animations = [{
 }]
 
 [node name="Asteroids" type="RigidBody2D" groups=["asteroid"]]
-mass = 0.002
+mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_58qlv")
+gravity_scale = 0.116
 contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_115gm")
